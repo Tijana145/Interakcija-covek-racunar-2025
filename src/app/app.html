@@ -15,8 +15,26 @@
           <a class="nav-link " routerLink="/about" routerLinkActive="active">
             <i class="fa-solid fa-circle-info"></i> About</a>
         </li>
+        @if (hasAuth()){
+           <li class="nav-item">
+          <button type="button" class="nav-link " (click)="doLogout()">
+             <i class="fa-solid fa-person-running"></i> Logout
+           </button>
+        </li>
+        } @else {
+            <li class="nav-item">
+          <a class="nav-link " routerLink="/login" routerLinkActive="active">
+           <i class="fa-solid fa-right-to-bracket"></i> Login
+            </a>
+        </li>
+
+        }
       </ul>
-      
+      @if (hasAuth()){
+      <div class="navbar-text">
+         <i class="fa-solid fa-user-secret"></i> {{getUserName()}}
+      </div>
+      }
     </div>
   </div>
 </nav>

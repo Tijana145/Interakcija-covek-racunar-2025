@@ -3,14 +3,15 @@ import { Home } from './home/home';
 import { Login } from './login/login';
 import { About } from './about/about';
 import { Signup } from './signup/signup';
-import { Details } from './details/details';
+import { Movie } from './movie/movie';
+
 
 export const routes: Routes = [
     {path: '', title:'Home', component: Home},
     {path: 'about',title:'About', component: About},
     {path: 'login', title:'Login', component: Login},
     {path: 'signup', title:'Signup', component: Signup},
-    {path: 'details/:id', title:'Details', component: Details},
+    {path: 'movie/:id', title:'Movie', component: Movie},
     {path: '**' , redirectTo: ''} 
 
 ];

@@ -1,20 +1,32 @@
 import { Component, signal } from '@angular/core';
 import { MovieService } from '../../services/movie.service';
+import { MovieModel } from '../models/movie.models';
+import { RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [RouterLink, FormsModule],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
 export class Home {
-  protected movies = signal<any>(null)
+  protected movies = signal<MovieModel[]>([])
+  protected previousSearch = 'N/A'
+  protected search = ''
 
   constructor() {
-    MovieService.getMovies()
-    .then(rsp => this.movies.set(JSON.stringify(rsp.data, null, 2)))
+    this.loadMovies()
   }
 
+  protected loadMovies() {
+    if (this.previousSearch == '' && this.search == '') 
+      return
+    
+    this.previousSearch = this.search
+     MovieService.getMovies(this.search)
+    .then(rsp => this.movies.set(rsp.data))
+  }
 
 }

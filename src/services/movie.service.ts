@@ -1,7 +1,16 @@
 import axios from "axios";
+import { MovieModel } from "../app/models/movie.models";
+
+const client = axios.create({
+    baseURL: 'https://movie.pequla.com/api',
+    headers: {
+        'Accept': 'application/json',
+        'X-Name': 'ICR/2025'
+    }
+});
 
 export class MovieService {
-    static async getMovies() {
-        return axios.get('https://movie.pequla.com/api/movie')
+    static async getMovies(search: string = '') {
+        return client.get<MovieModel[]>(`/movie?search=${search}`)
     }
 }
